@@ -33,7 +33,7 @@
 
 
 #define		VALUE_MOVE			(2.0f)							// ˆÚ“®—Ê
-#define		VALUE_ROTATE		(XM_PI * 0.02f)				// ‰ñ“]—Ê
+#define		VALUE_ROTATE		(XM_PI * 0.02f)					// ‰ñ“]—Ê
 
 #define		PLAYER_SHADOW_SIZE	(1.0f)							// ‰e‚Ì‘å‚«‚³
 #define		PLAYER_OFFSET_Y		(15.0f)							// ƒvƒŒƒCƒ„[‚Ì‘«Œ³‚ð‚ ‚í‚¹‚é

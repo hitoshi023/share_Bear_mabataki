@@ -33,6 +33,7 @@ struct ENEMY
 	float				spd;				// 移動スピード
 	float				size;				// 当たり判定の大きさ
 	int					shadowIdx;			// 影のインデックス番号
+	int					hp;					// エネミーのHP
 	
 	INTERPOLATION_DATA	*tbl_adr;			// アニメデータのテーブル先頭アドレス
 	int					tbl_size;			// 登録したテーブルのレコード総数

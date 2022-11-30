@@ -70,6 +70,7 @@ HRESULT InitEnemy(void)
 		XMFLOAT3 pos = g_Enemy[i].pos;
 		pos.y -= (ENEMY_OFFSET_Y - 0.1f);
 		g_Enemy[i].shadowIdx = CreateShadow(pos, ENEMY_SHADOW_SIZE, ENEMY_SHADOW_SIZE);
+		g_Enemy[i].hp = 5;				// エネミーの体力
 
 		g_Enemy[i].move_time = 0.0f;	// 線形補間用のタイマーをクリア
 		g_Enemy[i].tbl_adr = NULL;		// 再生するアニメデータの先頭アドレスをセット

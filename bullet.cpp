@@ -73,7 +73,7 @@ HRESULT InitBullet(void)
 
 		g_Bullet[nCntBullet].pos = { 0.0f, 0.0f, 0.0f };
 		g_Bullet[nCntBullet].rot = { 0.0f, 0.0f, 0.0f };
-		g_Bullet[nCntBullet].scl = { 1.0f, 1.0f, 1.0f };
+		g_Bullet[nCntBullet].scl = { 0.5f, 0.5f, 0.5f };
 		g_Bullet[nCntBullet].spd = BULLET_SPEED;
 		g_Bullet[nCntBullet].fWidth = BULLET_WIDTH;
 		g_Bullet[nCntBullet].fHeight = BULLET_HEIGHT;

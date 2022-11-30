@@ -393,23 +393,20 @@ void Draw(void)
 	DrawTree();
 
 
+	// 2Dの描画用
+	{
+		// Z比較とライティングを無効
+		SetDepthEnable(false);
+		SetLightEnable(false);
 
-	// 2Dの物を描画する処理
-	// Z比較なし
-	SetDepthEnable(false);
-
-	// ライティングを無効
-	SetLightEnable(false);
-
-	// スコアの描画処理
-	DrawScore();
+		// スコアの描画処理
+		DrawScore();
 
 
-	// ライティングを有効に
-	SetLightEnable(true);
-
-	// Z比較あり
-	SetDepthEnable(true);
+		// Z比較とライティングを有効
+		SetLightEnable(true);
+		SetDepthEnable(true);
+	}
 
 
 #ifdef _DEBUG
@@ -452,7 +449,9 @@ void CheckHit(void)
 	PLAYER *player = GetPlayer();	// プレイヤーのポインターを初期化
 	BULLET *bullet = GetBullet();	// 弾のポインターを初期化
 
-	// 敵とプレイヤーキャラ
+
+
+	///// エネミーとプレイヤーの当たり判定 /////
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
 		//敵の有効フラグをチェックする
@@ -462,18 +461,18 @@ void CheckHit(void)
 		//BCの当たり判定
 		if (CollisionBC(player->pos, enemy[i].pos, player->size, enemy[i].size))
 		{
-			// 敵キャラクターは倒される
+			// エネミーと影の廃棄
 			enemy[i].use = false;
 			ReleaseShadow(enemy[i].shadowIdx);
 
 			// スコアを足す
-			AddScore(100);
+			AddScore(10);
 
 		}
 	}
 
 
-	// プレイヤーの弾と敵
+	///// 弾とエネミーの当たり判定
 	for (int i = 0; i < MAX_BULLET; i++)
 	{
 		//弾の有効フラグをチェックする
@@ -490,16 +489,22 @@ void CheckHit(void)
 			//BCの当たり判定
 			if (CollisionBC(bullet[i].pos, enemy[j].pos, bullet[i].fWidth, enemy[j].size))
 			{
-				// 当たったから未使用に戻す
+				// 当たったから未使用に戻し、影を廃棄
 				bullet[i].use = false;
 				ReleaseShadow(bullet[i].shadowIdx);
 
-				// 敵キャラクターは倒される
-				enemy[j].use = false;
-				ReleaseShadow(enemy[j].shadowIdx);
+				/// エネミーのHPを削る
+				enemy[j].hp--;
+				
+				if (enemy[j].hp == 0)
+				{
+					// 敵キャラクターは倒される
+					enemy[j].use = false;
+					ReleaseShadow(enemy[j].shadowIdx);
 
-				// スコアを足す
-				AddScore(10);
+					// スコアを足す
+					AddScore(100);
+				}
 			}
 		}
 
